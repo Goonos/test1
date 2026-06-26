@@ -49,77 +49,35 @@ const DATA = {
     ],
 
     // 2. 아키텍처 및 백서 데이터 (⭐️ 그래프 뷰 및 스플릿 스크린용 확장 구조)
+    // 2. 아키텍처 및 백서 데이터 (2x2 Zero Downtime 구조)
     architecture: [
         {
             id: "arch-01",
-            title: "Oracle High Availability 복제(Replication) 구축 및 Failover 테스트",
-            summary: "Data Guard 기반의 Async 복제 구조를 설계하고, Primary DB 장애 발생 시 Standby DB가 무중단으로 역할을 이행하는지 검증한 보고서입니다.",
-            tags: ["Oracle", "Data Guard", "Replication", "HA", "Redo Log"], // 그래프 뷰의 노드(점)가 될 태그들
-            content: `
-                <div class="space-y-8 text-gray-300">
-                    <div>
-                        <h2 class="text-xl md:text-2xl font-bold text-white mb-4 border-b border-gray-700 pb-2">1. 아키텍처 개요</h2>
-                        <p class="text-sm leading-relaxed mb-4">본 문서에서는 물리적 장비(Primary DB)의 예기치 않은 장애(H/W Fault, Network Down)에 대비하여 Active-Standby 형태의 Oracle Data Guard 환경을 구축한 과정을 다룹니다.</p>
-                        <h3 class="text-base font-bold text-blue-400 mt-4 mb-2">📌 구성 환경 요약</h3>
-                        <ul class="list-disc pl-5 space-y-1 text-sm text-gray-400">
-                            <li><strong class="text-gray-300">Primary DB:</strong> Oracle 19c (CentOS 8)</li>
-                            <li><strong class="text-gray-300">Standby DB:</strong> Oracle 19c (CentOS 8)</li>
-                            <li><strong class="text-gray-300">Protection Mode:</strong> Maximum Performance (비동기 전송)</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h2 class="text-xl md:text-2xl font-bold text-white mb-4 border-b border-gray-700 pb-2">2. 검증 시나리오 및 결과</h2>
-                        <p class="text-sm leading-relaxed">Primary DB의 네트워크 인터페이스를 강제로 Down 시킨 후, Standby DB가 Primary 역할을 승계(Failover)하는 데 걸리는 TTO(Time To Objective)를 측정하였습니다. 결과적으로 애플리케이션 관점에서 약 15초 이내에 정상적인 트랜잭션 처리가 재개됨을 확인했습니다.</p>
-                    </div>
-                </div>
-            `
+            title: "[안정성] 엔터프라이즈 DB 표준 환경 구축",
+            summary: "단순 설치를 넘어, Linux 커널 튜닝부터 ASM 스토리지 구성까지 최적의 베이스 라인을 설계한 아키텍처입니다.",
+            tags: ["Oracle 19c", "Linux", "ASM"],
+            content: `<div class="p-5 text-gray-300">안정성 관련 상세 백서 내용이 들어갈 자리입니다.</div>`
         },
         {
             id: "arch-02",
-            title: "RMAN을 이용한 Backup & Recovery 무손실 완전 복구 시나리오",
-            summary: "물리적 디스크 손상 상태를 가상으로 시뮬레이션한 후, RMAN 백업본과 Redo Log를 이용해 무손실 완전 복구 프로세스를 정립한 백서입니다.",
-            tags: ["Oracle", "RMAN", "Backup", "Recovery", "Redo Log"],
-            content: `
-                <div class="space-y-8 text-gray-300">
-                    <div>
-                        <h2 class="text-xl md:text-2xl font-bold text-white mb-4 border-b border-gray-700 pb-2">1. 백업 정책 수립</h2>
-                        <p class="text-sm leading-relaxed">실무 환경과 동일한 조건을 부여하기 위해 주 1회 Level 0(Full) 백업, 일 단위 Level 1(Incremental) 백업을 스케줄링(Crontab 연동) 하였습니다.</p>
-                    </div>
-                    <div>
-                        <h2 class="text-xl md:text-2xl font-bold text-white mb-4 border-b border-gray-700 pb-2">2. Datafile 장애 시뮬레이션</h2>
-                        <p class="text-sm leading-relaxed">특정 테이블스페이스가 저장된 물리적 Datafile을 OS 단에서 강제로 삭제(rm -rf)하여 데이터베이스 Crash 현상을 유도했습니다.</p>
-                        <div class="bg-gray-900 border border-gray-700 p-4 rounded-lg mt-4">
-                            <code class="text-xs text-red-400 font-mono">ORA-01116: error in opening database file 4<br>ORA-01110: data file 4: '/u01/app/oracle/oradata/DB/users01.dbf'</code>
-                        </div>
-                    </div>
-                    <div>
-                        <h2 class="text-xl md:text-2xl font-bold text-white mb-4 border-b border-gray-700 pb-2">3. 복구 수행 절차</h2>
-                        <p class="text-sm leading-relaxed">RMAN 환경에서 복원(Restore) 및 복구(Recover) 명령을 순차적으로 수행하여 아카이브 로그와 온라인 리두 로그를 통해 장애 직전까지의 데이터를 100% 무손실 복구하는 데 성공했습니다.</p>
-                    </div>
-                </div>
-            `
+            title: "[가용성] Data Guard & RAC 고가용성 구성",
+            summary: "장애 발생 시 자동으로 대기 서버가 역할을 승계(Failover)하여 다운타임을 최소화하는 무중단 아키텍처입니다.",
+            tags: ["Data Guard", "RAC", "Failover"],
+            content: `<div class="p-5 text-gray-300">가용성 관련 상세 백서 내용이 들어갈 자리입니다.</div>`
         },
         {
             id: "arch-03",
-            title: "대용량 테이블 인덱스 튜닝 및 옵티마이저 실행계획 분석",
-            summary: "Cost Based Optimizer(CBO)의 작동 원리를 이해하고, 실행계획(Explain Plan)을 분석하여 최적의 인덱스를 설계한 성능 개선 보고서입니다.",
-            tags: ["Oracle", "Tuning", "Index", "Optimizer", "AWR"],
-            content: `
-                <div class="space-y-8 text-gray-300">
-                    <div>
-                        <h2 class="text-xl md:text-2xl font-bold text-white mb-4 border-b border-gray-700 pb-2">1. 개요 및 병목 현상</h2>
-                        <p class="text-sm leading-relaxed">수천만 건의 결제 데이터가 누적된 테이블에서 조회 쿼리 타임아웃이 빈번하게 발생. tkprof를 통한 트레이스 분석 결과 높은 Logical Read 수치가 병목의 원인임을 파악했습니다.</p>
-                    </div>
-                    <div>
-                        <h2 class="text-xl md:text-2xl font-bold text-white mb-4 border-b border-gray-700 pb-2">2. 접근 전략</h2>
-                        <p class="text-sm leading-relaxed">단순한 단일 인덱스 생성이 아닌, WHERE 절에 자주 사용되는 조건(범위 검색 vs 동등 검색)의 카디널리티를 분석하여 최적의 결합 인덱스 컬럼 순서를 도출했습니다.</p>
-                    </div>
-                    <div>
-                        <h2 class="text-xl md:text-2xl font-bold text-white mb-4 border-b border-gray-700 pb-2">3. 트러블슈팅 상세 결과</h2>
-                        <p class="text-sm leading-relaxed border-l-4 border-blue-500 pl-4">이 백서는 메인 화면의 트러블슈팅 카드 1번과 직접적으로 연관되어 있습니다. 이론적 배경(옵티마이저)과 실제 쿼리 수정 내역을 대조해 보실 수 있습니다.</p>
-                    </div>
-                </div>
-            `
+            title: "[생존성] RMAN 무손실 백업 및 복구",
+            summary: "디스크 손상 등 치명적 장애 상황을 가정한 제로 데이터 유실(Zero Data Loss) 복구 시나리오 파이프라인입니다.",
+            tags: ["RMAN", "Backup", "Recovery"],
+            content: `<div class="p-5 text-gray-300">생존성 관련 상세 백서 내용이 들어갈 자리입니다.</div>`
+        },
+        {
+            id: "arch-04",
+            title: "[확장성] 대용량 트랜잭션 분산 처리",
+            summary: "수천만 건의 데이터를 병렬로 빠르게 처리하기 위한 하이엔드 인프라(Exadata 등) 활용 아키텍처입니다.",
+            tags: ["Exadata", "Big Data", "Tuning"],
+            content: `<div class="p-5 text-gray-300">확장성 관련 상세 백서 내용이 들어갈 자리입니다.</div>`
         }
     ],
 
