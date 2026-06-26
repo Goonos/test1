@@ -92,7 +92,7 @@ const DATA = {
    blogLogs: [  
        {
             date: "2026-06-26",
-            title: "1회차 - 파이썬 반복문",
+            title: "4회차 - 파이썬 반복문",
             summary: "파이썬의 핵심 제어 흐름인 while문과 for문을 학습하여 조건 기반 반복부터 시퀀스 순회까지, 자동화와 알고리즘 구현의 토대가 되는 루프 구조의 동작 원리와 활용법을 다뤘습니다.",
             tags: ["Python"],
             link: "https://blog.naver.com/10soong/224328241497"
