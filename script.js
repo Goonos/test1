@@ -284,109 +284,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 2. 아키텍처 섹션 (⭐️ Vis.js 지식 그래프 네트워크)
+    // 2. 아키텍처 섹션 (버전 1: 클린 대시보드 리스트)
     // ==========================================
     try {
-        const graphContainer = document.getElementById("architecture-graph");
-        if (graphContainer && DATA.architecture && typeof vis !== 'undefined') {
-            
-            let nodesArray = [];
-            let edgesArray = [];
-            let tagSet = new Set();
-
-            // 1. 고유 태그(디렉토리) 추출
+        const archContainer = document.getElementById("arch-list-container");
+        if (archContainer && DATA.architecture) {
+            let listHtml = "";
             DATA.architecture.forEach(item => {
-                if (item.tags) item.tags.forEach(tag => tagSet.add(tag));
+                const tags = item.tags.map(t => `<span class="text-[10px] text-gray-400 bg-gray-800 px-2 py-0.5 rounded border border-gray-700">#${t}</span>`).join("");
+                
+                listHtml += `
+                    <div onclick="window.openSplitPanel('${item.id}')" class="group bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-blue-500/50 hover:bg-gray-800/50 transition duration-300 cursor-pointer flex flex-col md:flex-row gap-4 items-start md:items-center shadow-sm hover:shadow-md">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex gap-1.5 mb-2 flex-wrap">${tags}</div>
+                            <h3 class="text-base md:text-lg font-bold text-white mb-1.5 group-hover:text-blue-400 transition line-clamp-1">${item.title}</h3>
+                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed line-clamp-2">${item.summary}</p>
+                        </div>
+                        <div class="shrink-0 md:pl-4 text-gray-600 group-hover:text-blue-400 transition transform group-hover:translate-x-1">
+                            <i class="fas fa-chevron-right text-xl"></i>
+                        </div>
+                    </div>
+                `;
             });
-
-            // 2. 태그 노드(점) 생성
-            tagSet.forEach(tag => {
-                nodesArray.push({
-                    id: `tag-${tag}`,
-                    label: `#${tag}`,
-                    shape: 'dot',
-                    size: 10,
-                    color: { background: '#374151', border: '#4B5563', highlight: { background: '#3B82F6', border: '#60A5FA' } },
-                    font: { color: '#9CA3AF', size: 12, face: 'monospace' },
-                    group: 'tag'
-                });
-            });
-
-            // 3. 백서 문서 노드(점) 및 연결 선(Edge) 생성
-            DATA.architecture.forEach(item => {
-                nodesArray.push({
-                    id: item.id,
-                    // 노드에 보여질 제목 (너무 길면 자름)
-                    label: "📄 " + item.title.substring(0, 18) + "...", 
-                    title: item.title + "\n\n" + item.summary, // 마우스 Hover 툴팁
-                    shape: 'box',
-                    color: { background: '#1F2937', border: '#3B82F6', highlight: { background: '#2563EB', border: '#60A5FA' } },
-                    font: { color: '#F3F4F6', size: 14, multi: true, face: 'sans-serif' },
-                    margin: 12,
-                    group: 'doc'
-                });
-
-                // 문서와 태그를 선으로 연결
-                if (item.tags) {
-                    item.tags.forEach(tag => {
-                        edgesArray.push({
-                            from: item.id,
-                            to: `tag-${tag}`,
-                            color: { color: '#374151', highlight: '#3B82F6', hover: '#60A5FA', opacity: 0.6 },
-                            width: 1.5,
-                            length: 180 // 선 길이
-                        });
-                    });
-                }
-            });
-
-            const visData = {
-                nodes: new vis.DataSet(nodesArray),
-                edges: new vis.DataSet(edgesArray)
-            };
-
-            const options = {
-                nodes: {
-                    borderWidth: 2,
-                    shadow: { enabled: true, color: 'rgba(0,0,0,0.5)', size: 10, x: 5, y: 5 }
-                },
-                edges: {
-                    smooth: { type: 'continuous' }
-                },
-                physics: {
-                    // 노드들이 서로 밀어내어 예쁘게 배치되도록 하는 물리 엔진 설정
-                    barnesHut: { gravitationalConstant: -3000, centralGravity: 0.3, springLength: 95, springConstant: 0.04 },
-                    stabilization: { iterations: 200 }
-                },
-                interaction: {
-                    hover: true,
-                    tooltipDelay: 150,
-                    zoomView: true, 
-                    dragView: true
-                }
-            };
-
-            const network = new vis.Network(graphContainer, visData, options);
-
-            // ⭐️ 노드(점) 클릭 이벤트: 스플릿 스크린 패널 열기
-            network.on("selectNode", function (params) {
-                if (params.nodes.length === 1) {
-                    const nodeId = params.nodes[0];
-                    // 태그가 아닌 '문서(doc)' 노드를 클릭했을 때만 실행
-                    if (nodeId.startsWith("arch-")) {
-                        window.openSplitPanel(nodeId);
-                    }
-                }
-            });
-            
-            // 빈 바탕을 클릭하면 아무것도 선택 안 된 상태로 되돌리기
-            network.on("deselectNode", function () {
-                // 원한다면 빈 곳 클릭 시 스플릿 스크린을 닫을 수도 있습니다.
-                // window.closeSplitPanel(); 
-            });
+            archContainer.innerHTML = listHtml;
         }
     } catch (e) {
-        console.error("Architecture Graph Error 예외 처리:", e);
+        console.error("Architecture List Error:", e);
     }
 
     // ==========================================
