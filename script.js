@@ -286,30 +286,40 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 2. 아키텍처 섹션 (버전 1: 클린 대시보드 리스트)
     // ==========================================
+    // ==========================================
+    // 2. 아키텍처 섹션 (버전 2: 가로축 스크롤 타임라인)
+    // ==========================================
     try {
-        const archContainer = document.getElementById("arch-list-container");
-        if (archContainer && DATA.architecture) {
-            let listHtml = "";
-            DATA.architecture.forEach(item => {
-                const tags = item.tags.map(t => `<span class="text-[10px] text-gray-400 bg-gray-800 px-2 py-0.5 rounded border border-gray-700">#${t}</span>`).join("");
+        const tlContainer = document.getElementById("arch-timeline-container");
+        if (tlContainer && DATA.architecture) {
+            let tlHtml = "";
+            DATA.architecture.forEach((item, index) => {
+                // 공간 절약을 위해 태그는 3개까지만 노출
+                const tags = item.tags.slice(0, 3).map(t => `<span class="text-[10px] text-gray-400 bg-gray-800/80 px-2 py-0.5 rounded">#${t}</span>`).join("");
                 
-                listHtml += `
-                    <div onclick="window.openSplitPanel('${item.id}')" class="group bg-gray-900 border border-gray-800 rounded-xl p-5 hover:border-blue-500/50 hover:bg-gray-800/50 transition duration-300 cursor-pointer flex flex-col md:flex-row gap-4 items-start md:items-center shadow-sm hover:shadow-md">
-                        <div class="flex-1 min-w-0">
-                            <div class="flex gap-1.5 mb-2 flex-wrap">${tags}</div>
-                            <h3 class="text-base md:text-lg font-bold text-white mb-1.5 group-hover:text-blue-400 transition line-clamp-1">${item.title}</h3>
-                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed line-clamp-2">${item.summary}</p>
+                tlHtml += `
+                    <div onclick="window.openSplitPanel('${item.id}')" class="shrink-0 w-[280px] md:w-[320px] snap-start cursor-pointer group pb-4">
+                        
+                        <div class="flex flex-col items-center mb-4 relative">
+                            <div class="w-12 h-12 rounded-full bg-gray-900 border-4 border-gray-800 flex items-center justify-center group-hover:border-blue-500 group-hover:bg-blue-500/10 transition z-10 shadow-lg">
+                                <span class="text-xs font-bold text-gray-500 group-hover:text-blue-400 transition">${index + 1}</span>
+                            </div>
                         </div>
-                        <div class="shrink-0 md:pl-4 text-gray-600 group-hover:text-blue-400 transition transform group-hover:translate-x-1">
-                            <i class="fas fa-chevron-right text-xl"></i>
+                        
+                        <div class="bg-gray-900 border border-gray-800 rounded-xl p-5 group-hover:border-blue-500/50 group-hover:bg-gray-800/50 transition relative mt-2 shadow-sm group-hover:shadow-md group-hover:-translate-y-1 transform duration-300">
+                            <div class="absolute -top-[9px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-b-[8px] border-l-transparent border-r-transparent border-b-gray-800 group-hover:border-b-blue-500/50 transition"></div>
+                            
+                            <h3 class="text-sm md:text-base font-bold text-white mb-2 line-clamp-2 group-hover:text-blue-400 transition">${item.title}</h3>
+                            <div class="flex gap-1 mb-3 flex-wrap">${tags}</div>
+                            <p class="text-gray-400 text-xs leading-relaxed line-clamp-3">${item.summary}</p>
                         </div>
                     </div>
                 `;
             });
-            archContainer.innerHTML = listHtml;
+            tlContainer.innerHTML = tlHtml;
         }
     } catch (e) {
-        console.error("Architecture List Error:", e);
+        console.error("Architecture Timeline Error:", e);
     }
 
     // ==========================================
