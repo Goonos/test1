@@ -48,36 +48,43 @@ const DATA = {
         },
     ],
 
-    // 2. 아키텍처 및 백서 데이터 (⭐️ 그래프 뷰 및 스플릿 스크린용 확장 구조)
-    // 2. 아키텍처 및 백서 데이터 (2x2 Zero Downtime 구조)
+    // 2. 아키텍처 및 백서 데이터 (2x2 Zero Downtime 구조 - 시각화 버전)
     architecture: [
         {
             id: "arch-01",
-            title: "[안정성] 엔터프라이즈 DB 표준 환경 구축",
+            pillar: "STABILITY",
+            icon: "fas fa-shield-alt",
+            title: "엔터프라이즈 DB 표준 환경 구축",
             summary: "단순 설치를 넘어, Linux 커널 튜닝부터 ASM 스토리지 구성까지 최적의 베이스 라인을 설계한 아키텍처입니다.",
             tags: ["Oracle 19c", "Linux", "ASM"],
-            content: `<div class="p-5 text-gray-300">안정성 관련 상세 백서 내용이 들어갈 자리입니다.</div>`
+            content: `<div class="p-5 text-gray-300">STABILITY 관련 상세 백서 내용이 들어갈 자리입니다.</div>`
         },
         {
             id: "arch-02",
-            title: "[가용성] Data Guard & RAC 고가용성 구성",
+            pillar: "AVAILABILITY",
+            icon: "fas fa-server",
+            title: "Data Guard & RAC 고가용성 구성",
             summary: "장애 발생 시 자동으로 대기 서버가 역할을 승계(Failover)하여 다운타임을 최소화하는 무중단 아키텍처입니다.",
             tags: ["Data Guard", "RAC", "Failover"],
-            content: `<div class="p-5 text-gray-300">가용성 관련 상세 백서 내용이 들어갈 자리입니다.</div>`
+            content: `<div class="p-5 text-gray-300">AVAILABILITY 관련 상세 백서 내용이 들어갈 자리입니다.</div>`
         },
         {
             id: "arch-03",
-            title: "[생존성] RMAN 무손실 백업 및 복구",
+            pillar: "RESILIENCE",
+            icon: "fas fa-life-ring",
+            title: "RMAN 무손실 백업 및 복구",
             summary: "디스크 손상 등 치명적 장애 상황을 가정한 제로 데이터 유실(Zero Data Loss) 복구 시나리오 파이프라인입니다.",
             tags: ["RMAN", "Backup", "Recovery"],
-            content: `<div class="p-5 text-gray-300">생존성 관련 상세 백서 내용이 들어갈 자리입니다.</div>`
+            content: `<div class="p-5 text-gray-300">RESILIENCE 관련 상세 백서 내용이 들어갈 자리입니다.</div>`
         },
         {
             id: "arch-04",
-            title: "[확장성] 대용량 트랜잭션 분산 처리",
+            pillar: "SCALABILITY",
+            icon: "fas fa-project-diagram",
+            title: "대용량 트랜잭션 분산 처리",
             summary: "수천만 건의 데이터를 병렬로 빠르게 처리하기 위한 하이엔드 인프라(Exadata 등) 활용 아키텍처입니다.",
             tags: ["Exadata", "Big Data", "Tuning"],
-            content: `<div class="p-5 text-gray-300">확장성 관련 상세 백서 내용이 들어갈 자리입니다.</div>`
+            content: `<div class="p-5 text-gray-300">SCALABILITY 관련 상세 백서 내용이 들어갈 자리입니다.</div>`
         }
     ],
 
