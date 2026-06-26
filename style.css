@@ -30,13 +30,43 @@ html {
     width: 45% !important;
 }
 
-/* 3. 우측 백서 패널 확장 (PC 기준 55%) */
+/* 3. 우측 백서 패널 확장 및 ⭐️ 좌측 그라데이션 경계선 적용 */
 .split-active-panel {
     width: 55% !important;
     opacity: 1 !important;
     pointer-events: auto !important;
-    border-left-color: #1f2937 !important; /* Tailwind border-gray-800 */
-    box-shadow: -20px 0 50px -10px rgba(0, 0, 0, 0.8);
+    border-left: none !important; /* 딱딱한 선명한 경계선 제거 */
+    /* 왼쪽 끝 5% 공간을 투명하게 부드럽게 날려버리는 마스크 효과 */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%);
+    mask-image: linear-gradient(to right, transparent 0%, black 5%);
+}
+
+/* ==========================================
+   4. 스플릿 스크린 활성화 시 아키텍처 1x4 압축 뷰어 효과
+   ========================================== */
+.split-active-main #arch-quadrant-container {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important; /* 1열(1x4) 리스트로 변경 */
+    gap: 1rem !important; /* 카드 간 간격 축소 */
+}
+
+.split-active-main .arch-card {
+    min-height: 0 !important; /* 기존 높이 제한 해제 */
+    padding: 1.25rem !important; /* 내부 패딩(여백) 얇게 축소 */
+}
+
+/* 스플릿 스크린이 열리면 본문 내용은 숨김 */
+.split-active-main .arch-summary {
+    display: none !important; 
+}
+
+/* 스플릿 스크린 압축 상태일 때의 간격 디테일 조절 */
+.split-active-main .arch-header {
+    margin-bottom: 0.5rem !important; 
+    padding-bottom: 0.5rem !important;
+}
+
+.split-active-main .arch-title {
+    margin-bottom: 0.5rem !important; 
 }
 
 /* 모바일/태블릿(768px 이하) 대응: 화면 분할 대신 전체 덮어쓰기 */
