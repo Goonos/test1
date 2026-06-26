@@ -284,38 +284,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 2. 아키텍처 섹션 (2x2 Quadrant 방사형 레이아웃)
+    // 2. 아키텍처 섹션 (2x2 Quadrant 방사형 레이아웃 - 시각화 버전)
     // ==========================================
     try {
         const quadContainer = document.getElementById("arch-quadrant-container");
         if (quadContainer && DATA.architecture) {
             let quadHtml = "";
             DATA.architecture.forEach((item, index) => {
-                const tags = item.tags.map(t => `<span class="text-[10px] text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20 font-mono">#${t}</span>`).join("");
+                const tags = item.tags.map(t => `<span class="text-[10px] text-gray-400 bg-gray-800/80 px-2 py-0.5 rounded border border-gray-700">#${t}</span>`).join("");
                 
-                // 중앙의 'Zero Downtime' 코어를 시각적으로 피하기 위한 방향별 패딩
+                // 중앙 코어를 피하기 위한 여백 (PC 환경에서만 작동)
                 let extraClass = "";
-                if (index === 0) extraClass = "md:pr-6 md:pb-6"; // 좌상단 (1사분면)
-                else if (index === 1) extraClass = "md:pl-6 md:pb-6"; // 우상단 (2사분면)
-                else if (index === 2) extraClass = "md:pr-6 md:pt-6"; // 좌하단 (3사분면)
-                else if (index === 3) extraClass = "md:pl-6 md:pt-6"; // 우하단 (4사분면)
+                if (index === 0) extraClass = "md:pr-8 md:pb-8"; 
+                else if (index === 1) extraClass = "md:pl-8 md:pb-8"; 
+                else if (index === 2) extraClass = "md:pr-8 md:pt-8"; 
+                else if (index === 3) extraClass = "md:pl-8 md:pt-8"; 
 
                 quadHtml += `
                     <div class="${extraClass} flex">
-                        <div onclick="window.openSplitPanel('${item.id}')" class="w-full bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 hover:border-blue-500/50 hover:bg-gray-800 transition duration-300 cursor-pointer group shadow-lg hover:shadow-[0_0_25px_rgba(59,130,246,0.15)] relative overflow-hidden flex flex-col justify-between h-full min-h-[220px]">
+                        <div onclick="window.openSplitPanel('${item.id}')" class="w-full bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 hover:border-blue-500/40 hover:bg-gray-800 transition duration-300 cursor-pointer group shadow-lg hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] relative overflow-hidden flex flex-col justify-between h-full min-h-[220px]">
                             
-                            <div class="absolute -inset-full bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl"></div>
+                            <!-- 은은한 호버 배경 빛 -->
+                            <div class="absolute -inset-full bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl z-0"></div>
                             
+                            <!-- 배경 워터마크 아이콘 (오른쪽 아래에 희미하게 크게 보임) -->
+                            <i class="${item.icon} absolute -bottom-4 -right-4 text-8xl text-gray-800/30 group-hover:text-blue-500/5 transition duration-500 transform group-hover:scale-110 z-0"></i>
+
                             <div class="relative z-10">
-                                <h3 class="text-lg font-bold text-white mb-3 group-hover:text-blue-400 transition">${item.title}</h3>
-                                <div class="flex gap-1.5 mb-4 flex-wrap">${tags}</div>
-                                <p class="text-gray-400 text-sm leading-relaxed">${item.summary}</p>
-                            </div>
-                            
-                            <div class="mt-6 flex items-center justify-end relative z-10 border-t border-gray-800/60 pt-4">
-                                <span class="text-xs text-gray-500 group-hover:text-blue-400 transition flex items-center gap-1 font-medium">
-                                    View Blueprint <i class="fas fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition"></i>
-                                </span>
+                                <!-- ⭐️ 그림 형태의 타이틀 뱃지 (아이콘 + 영문 키워드) -->
+                                <div class="flex items-center gap-4 mb-5 pb-4 border-b border-gray-800/80">
+                                    <div class="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center justify-center shrink-0 group-hover:bg-blue-500/20 transition">
+                                        <i class="${item.icon} text-xl text-blue-400"></i>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="text-[10px] font-mono text-gray-500 tracking-wider">PILLAR 0${index + 1}</span>
+                                        <strong class="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 tracking-wide">${item.pillar}</strong>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-sm font-bold text-gray-200 mb-2">${item.title}</h3>
+                                <p class="text-gray-400 text-xs leading-relaxed mb-4">${item.summary}</p>
+                                <div class="flex gap-1.5 flex-wrap">${tags}</div>
                             </div>
                         </div>
                     </div>
