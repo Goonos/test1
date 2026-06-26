@@ -89,7 +89,14 @@ const DATA = {
     ],
 
     // 3. 외부 블로그 링크 데이터
-   blogLogs: [   
+   blogLogs: [  
+       {
+            date: "2026-06-26",
+            title: "1회차 - 파이썬 반복문",
+            summary: "파이썬의 핵심 제어 흐름인 while문과 for문을 학습하여 조건 기반 반복부터 시퀀스 순회까지, 자동화와 알고리즘 구현의 토대가 되는 루프 구조의 동작 원리와 활용법을 다뤘습니다.",
+            tags: ["Python"],
+            link: "https://blog.naver.com/10soong/224328241497"
+        }, 
        {
             date: "2026-06-25",
             title: "3회차 - 파이썬 제어문",
@@ -111,7 +118,6 @@ const DATA = {
             tags: ["Python"],
             link: "https://blog.naver.com/10soong/224324868806"
         },
-           { date: "yyyy-mm-dd", title: "text", summary: "text", tags: ["Python"], link: "https://blog.naver.com/10soong" },
            { date: "yyyy-mm-dd", title: "text", summary: "text", tags: ["Python"], link: "https://blog.naver.com/10soong" },
            { date: "yyyy-mm-dd", title: "text", summary: "text", tags: ["Python"], link: "https://blog.naver.com/10soong" },
            { date: "yyyy-mm-dd", title: "text", summary: "text", tags: ["Python"], link: "https://blog.naver.com/10soong" },
