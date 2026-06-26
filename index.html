@@ -240,15 +240,17 @@
         </footer>
     </div>
     <div id="split-panel" class="fixed top-0 right-0 h-full w-0 bg-gray-950 border-l border-transparent z-40 transition-all duration-500 ease-in-out flex flex-col opacity-0 pointer-events-none">
-        <div class="p-4 md:p-5 border-b border-gray-800 flex justify-between items-center bg-gray-950/90 backdrop-blur-md sticky top-0 z-10">
-            <div class="flex items-center gap-2 min-w-0">
-                <span class="text-[10px] bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/20 font-mono shrink-0">WHITE PAPER</span>
-                <h3 id="split-panel-title" class="text-sm md:text-base font-bold text-white line-clamp-1">백서 상세 내용</h3>
+        
+        <div class="px-5 md:px-6 py-3 md:py-4 border-b border-gray-800 flex justify-between items-center bg-gray-950/90 backdrop-blur-md sticky top-0 z-10">
+            <div class="flex items-center gap-2.5 md:gap-3 min-w-0">
+                <i id="split-panel-icon" class="fas fa-file-alt text-blue-400 text-lg md:text-xl shrink-0"></i>
+                <h3 id="split-panel-title" class="text-sm md:text-base font-bold text-white line-clamp-1 mt-0.5">백서 상세 내용</h3>
             </div>
             <button id="split-panel-close" class="text-gray-400 hover:text-white text-lg p-1.5 transition cursor-pointer rounded-lg hover:bg-gray-900 flex items-center justify-center">
                 <i class="fas fa-times"></i>
             </button>
         </div>
+
         <div id="split-panel-body" class="p-5 md:p-8 flex-1 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-gray-950 [&::-webkit-scrollbar-thumb]:bg-gray-800 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-700">
             </div>
     </div>
