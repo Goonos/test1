@@ -284,10 +284,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 2. 아키텍처 섹션 (버전 1: 클린 대시보드 리스트)
-    // ==========================================
-    // ==========================================
-    // 2. 아키텍처 섹션 (버전 2: 가로축 스크롤 타임라인)
+    // 2. 아키텍처 섹션 (버전 2: 가로축 스크롤 타임라인 + 마우스 휠 연동)
     // ==========================================
     try {
         const tlContainer = document.getElementById("arch-timeline-container");
@@ -317,6 +314,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
             });
             tlContainer.innerHTML = tlHtml;
+
+            // ⭐️ 마우스 휠 스크롤을 가로로 변환해주는 핵심 로직 ⭐️
+            tlContainer.addEventListener("wheel", (e) => {
+                // 마우스 세로 휠(deltaY) 움직임이 감지되었을 때
+                if (e.deltaY !== 0) {
+                    // 1. 기본 브라우저 스크롤(위아래로 화면 이동)을 차단
+                    e.preventDefault(); 
+                    
+                    // 2. 그 수치만큼 컨테이너를 왼쪽/오른쪽으로 스크롤
+                    tlContainer.scrollBy({
+                        left: e.deltaY < 0 ? -150 : 150, // 한 번 휠을 굴릴 때마다 부드럽게 이동할 픽셀량
+                        behavior: 'smooth' // 부드러운 스크롤 애니메이션 적용
+                    });
+                }
+            }, { passive: false }); // preventDefault()를 사용하기 위한 필수 설정
         }
     } catch (e) {
         console.error("Architecture Timeline Error:", e);
