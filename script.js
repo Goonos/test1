@@ -1,28 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
     
     // ==========================================
-    // 1. 트러블슈팅 섹션 (좌우 무한 순환 3D 휠 슬라이더 - 자세히 보기 복구 완료)
+    // 1. 트러블슈팅 섹션 (데이터 누락 없는 정상 복구 버전)
     // ==========================================
     try {
         const troubleContainer = document.getElementById("trouble-container");
-        const troubleIndicator = document.getElementById("trouble-indicator");
-        const troubleIndicatorMobile = document.getElementById("trouble-indicator-mobile");
-        
         if (troubleContainer && DATA.troubleshooting && DATA.troubleshooting.length > 0) {
-            const tItemsPerPage = 1; 
-            const tTotalItems = DATA.troubleshooting.length;
-            const tTotalPages = Math.ceil(tTotalItems / tItemsPerPage);
-            let tCurrentPage = 0;
-
+            const tTotalPages = DATA.troubleshooting.length;
             troubleContainer.innerHTML = ""; 
             troubleContainer.style.perspective = "1200px";
-            troubleContainer.style.transformStyle = "preserve-3d";
             troubleContainer.className = "relative w-full transition-all duration-500 ease-in-out";
 
             for (let i = 0; i < tTotalPages; i++) {
                 const item = DATA.troubleshooting[i];
-                if (!item) continue;
                 
+                // 상세 내용 부분 생성 (기존 로직 유지)
                 let detailsHtml = "";
                 if (item.details && item.details.length > 0) {
                     item.details.forEach(det => {
@@ -35,36 +27,34 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
 
+                // ⭐️ 카드 전체 구조 및 데이터 렌더링 정상화
                 let phtml = `
-                    <div id="trouble-card-${i}" class="trouble-card absolute inset-x-0 mx-auto w-[92%] md:w-[76%] transition-all duration-500 ease-in-out origin-center select-none" style="opacity: 0; pointer-events: none; backface-visibility: hidden;">
-                        <div class="bg-gray-800 border border-gray-700 rounded-xl p-5 md:p-6 w-full min-w-0 overflow-hidden flex flex-col shadow-2xl">
-                            <h3 class="text-lg md:text-xl font-bold text-white mb-4 flex flex-col md:flex-row md:items-center gap-2 items-start w-full min-w-0">
-                                <span class="text-[10px] md:text-xs bg-red-500/10 text-red-400 px-2.5 py-1 rounded-full font-mono font-normal whitespace-nowrap shrink-0">Issue</span> 
-                                <span class="leading-snug break-all">${item.title}</span>
+                    <div id="trouble-card-${i}" class="trouble-card absolute inset-x-0 mx-auto w-[92%] md:w-[76%] transition-all duration-500 ease-in-out origin-center" style="opacity: 0; pointer-events: none;">
+                        <div class="bg-gray-800 border border-gray-700 rounded-xl p-5 md:p-6 w-full shadow-2xl">
+                            <h3 class="text-lg md:text-xl font-bold text-white mb-4 flex items-center gap-2">
+                                <span class="text-[10px] bg-red-500/10 text-red-400 px-2 py-0.5 rounded font-mono">Issue</span> 
+                                ${item.title}
                             </h3>
                             
-                            <div class="flex flex-col gap-4 md:gap-5 text-xs md:text-sm leading-relaxed text-gray-300 w-full min-w-0">
-                                <p class="m-0"><strong class="text-blue-400">🚨 현상 (Context):</strong><br>${item.context}</p>
-                                <p class="m-0"><strong class="text-emerald-400">📈 결과 (Result):</strong><br>${item.result}</p>
+                            <div class="space-y-4 text-xs md:text-sm text-gray-300">
+                                <p><strong class="text-blue-400">🚨 현상:</strong> ${item.context}</p>
+                                <p><strong class="text-emerald-400">📈 결과:</strong> ${item.result}</p>
                                 
-                                <div class="min-w-0 w-full flex flex-col m-0">
+                                <div>
                                     <strong class="text-purple-400 block mb-2">💻 수정된 쿼리:</strong>
-                                    <div id="code-wrapper-${item.id}" class="relative w-full rounded-lg bg-gray-950 border border-gray-800 overflow-hidden transition-all duration-500 ease-in-out [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-gray-950 [&::-webkit-scrollbar-thumb]:bg-gray-700 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-500" style="max-height: 160px;">
-                                        <pre class="w-full max-w-full block p-4 pb-12 text-[10px] md:text-xs font-mono [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-gray-700 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-500"><code class="language-sql">${item.code}</code></pre>
-                                        <div id="code-fade-${item.id}" class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-gray-950 to-transparent pointer-events-none transition-opacity duration-500"></div>
+                                    <div class="rounded-lg bg-gray-950 border border-gray-800 p-4 overflow-hidden">
+                                        <pre class="text-[10px] md:text-xs font-mono text-gray-200"><code>${item.code}</code></pre>
                                     </div>
                                 </div>
                             </div>
 
-                            <div id="details-${item.id}" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-                                <div class="py-2">
-                                    ${detailsHtml}
-                                </div>
+                            <div id="details-${item.id}" class="max-h-0 overflow-hidden transition-all duration-500">
+                                ${detailsHtml}
                             </div>
 
-                            <div class="mt-4 pt-4 border-t border-gray-800/40 flex justify-end">
-                                <button data-target="details-${item.id}" class="toggle-detail-btn text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded-md border border-gray-700 transition inline-flex items-center gap-1 cursor-pointer">
-                                    <span>자세히 보기</span> <i class="fas fa-chevron-down text-[10px] transition-transform duration-300"></i>
+                            <div class="mt-6 pt-4 border-t border-gray-800/40 flex justify-end">
+                                <button data-target="details-${item.id}" class="toggle-detail-btn text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-4 py-2 rounded border border-gray-700 transition flex items-center gap-1.5">
+                                    <span>자세히 보기</span> <i class="fas fa-chevron-down text-[10px]"></i>
                                 </button>
                             </div>
                         </div>
@@ -72,181 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
                 troubleContainer.innerHTML += phtml;
             }
-
-            function closeAllDetails() {
-                document.querySelectorAll(".toggle-detail-btn").forEach(btn => {
-                    const targetId = btn.getAttribute("data-target");
-                    const targetEl = document.getElementById(targetId);
-                    if (!targetEl) return;
-                    
-                    const codeId = targetId.replace("details-", "");
-                    const codeWrapper = document.getElementById(`code-wrapper-${codeId}`);
-                    const codeFade = document.getElementById(`code-fade-${codeId}`);
-
-                    const icon = btn.querySelector("i");
-                    const btnText = btn.querySelector("span");
-
-                    if (targetEl.style.maxHeight !== "" && targetEl.style.maxHeight !== "0px") {
-                        targetEl.style.maxHeight = "0px";
-                        
-                        if (codeWrapper) {
-                            codeWrapper.style.maxHeight = "160px";
-                            codeWrapper.classList.remove("overflow-y-auto");
-                            codeWrapper.classList.add("overflow-hidden");
-                            codeWrapper.scrollTop = 0; 
-                        }
-                        if (codeFade) codeFade.style.opacity = "1";
-
-                        if (icon) icon.style.transform = "rotate(0deg)";
-                        if (btnText) btnText.innerText = "자세히 보기";
-                        btn.classList.remove("bg-blue-500/10", "text-blue-400", "border-blue-500/30");
-                    }
-                });
-            }
-
-            function updateTroubleSlider() {
-                closeAllDetails(); 
-
-                const cards = troubleContainer.querySelectorAll(".trouble-card");
-                cards.forEach((card, idx) => {
-                    let distance = idx - tCurrentPage;
-                    
-                    if (tTotalPages > 2) {
-                        if (distance > tTotalPages / 2) {
-                            distance -= tTotalPages;
-                        } else if (distance < -tTotalPages / 2) {
-                            distance += tTotalPages;
-                        }
-                    } else if (tTotalPages === 2) {
-                        if (tCurrentPage === 0 && idx === 1) distance = 1;
-                        if (tCurrentPage === 1 && idx === 0) distance = -1;
-                    }
-                    
-                    if (distance === 0) {
-                        card.style.transform = "translate3d(0, 0, 0) rotateY(0deg) scale(1)";
-                        card.style.opacity = "1";
-                        card.style.zIndex = "10";
-                        card.style.filter = "none";
-                        card.style.pointerEvents = "auto";
-                    } else if (distance === -1) {
-                        card.style.transform = "translate3d(-24%, 0, -180px) rotateY(28deg) scale(0.85)";
-                        card.style.opacity = "0.35";
-                        card.style.zIndex = "5";
-                        card.style.filter = "blur(1.5px)";
-                        card.style.pointerEvents = "none";
-                    } else if (distance === 1) {
-                        card.style.transform = "translate3d(24%, 0, -180px) rotateY(-28deg) scale(0.85)";
-                        card.style.opacity = "0.35";
-                        card.style.zIndex = "5";
-                        card.style.filter = "blur(1.5px)";
-                        card.style.pointerEvents = "none";
-                    } else {
-                        const side = distance > 0 ? 1 : -1;
-                        card.style.transform = `translate3d(${side * 45}%, 0, -350px) rotateY(${-side * 45}deg) scale(0.7)`;
-                        card.style.opacity = "0";
-                        card.style.zIndex = "1";
-                        card.style.filter = "blur(4px)";
-                        card.style.pointerEvents = "none";
-                    }
-                });
-
-                setTimeout(() => {
-                    const activeCard = troubleContainer.children[tCurrentPage];
-                    if (activeCard) {
-                        troubleContainer.style.height = activeCard.offsetHeight + "px";
-                    }
-                }, 60);
-                
-                const indicatorText = `Page ${tCurrentPage + 1} / ${tTotalPages}`;
-                if (troubleIndicator) troubleIndicator.innerText = indicatorText;
-                if (troubleIndicatorMobile) troubleIndicatorMobile.innerText = indicatorText;
-            }
-
-            const tPrevButtons = [document.getElementById("trouble-prev"), document.getElementById("trouble-prev-mobile")];
-            const tNextButtons = [document.getElementById("trouble-next"), document.getElementById("trouble-next-mobile")];
-
-            tPrevButtons.forEach(btn => {
-                if (btn) {
-                    btn.addEventListener("click", () => {
-                        tCurrentPage = (tCurrentPage - 1 + tTotalPages) % tTotalPages;
-                        updateTroubleSlider();
-                    });
-                }
-            });
-
-            tNextButtons.forEach(btn => {
-                if (btn) {
-                    btn.addEventListener("click", () => {
-                        tCurrentPage = (tCurrentPage + 1) % tTotalPages;
-                        updateTroubleSlider();
-                    });
-                }
-            });
-
-            updateTroubleSlider();
-
-            document.querySelectorAll(".toggle-detail-btn").forEach(btn => {
-                btn.addEventListener("click", (e) => {
-                    const currentBtn = e.currentTarget;
-                    const targetId = currentBtn.getAttribute("data-target");
-                    const targetEl = document.getElementById(targetId);
-                    if (!targetEl) return;
-                    
-                    const codeId = targetId.replace("details-", "");
-                    const codeWrapper = document.getElementById(`code-wrapper-${codeId}`);
-                    const codeFade = document.getElementById(`code-fade-${codeId}`);
-
-                    const icon = currentBtn.querySelector("i");
-                    const btnText = currentBtn.querySelector("span");
-
-                    if (targetEl.style.maxHeight === "" || targetEl.style.maxHeight === "0px") {
-                        targetEl.style.maxHeight = targetEl.scrollHeight + "px";
-                        
-                        if (codeWrapper) {
-                            const maxExpandedHeight = 500; 
-                            if (codeWrapper.scrollHeight > maxExpandedHeight) {
-                                codeWrapper.style.maxHeight = maxExpandedHeight + "px";
-                                codeWrapper.classList.remove("overflow-hidden");
-                                codeWrapper.classList.add("overflow-y-auto");
-                            } else {
-                                codeWrapper.style.maxHeight = codeWrapper.scrollHeight + "px";
-                            }
-                        }
-                        if (codeFade) codeFade.style.opacity = "0";
-
-                        if (icon) icon.style.transform = "rotate(180deg)";
-                        if (btnText) btnText.innerText = "접기";
-                        currentBtn.classList.add("bg-blue-500/10", "text-blue-400", "border-blue-500/30");
-                        
-                        setTimeout(() => {
-                            const activeCard = troubleContainer.children[tCurrentPage];
-                            if (activeCard) troubleContainer.style.height = activeCard.offsetHeight + "px";
-                        }, 510);
-                    } else {
-                        targetEl.style.maxHeight = "0px";
-                        
-                        if (codeWrapper) {
-                            codeWrapper.style.maxHeight = "160px";
-                            codeWrapper.classList.remove("overflow-y-auto");
-                            codeWrapper.classList.add("overflow-hidden");
-                            codeWrapper.scrollTop = 0; 
-                        }
-                        if (codeFade) codeFade.style.opacity = "1";
-
-                        if (icon) icon.style.transform = "rotate(0deg)";
-                        if (btnText) btnText.innerText = "자세히 보기";
-                        currentBtn.classList.remove("bg-blue-500/10", "text-blue-400", "border-blue-500/30");
-                        
-                        setTimeout(() => {
-                            const activeCard = troubleContainer.children[tCurrentPage];
-                            if (activeCard) troubleContainer.style.height = activeCard.offsetHeight + "px";
-                        }, 510);
-                    }
-                });
-            });
         }
     } catch (e) {
-        console.error("Troubleshooting Error 예외 처리:", e);
+        console.error("Troubleshooting Error:", e);
     }
 
     // ==========================================
