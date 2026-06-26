@@ -193,36 +193,27 @@
                     <p class="text-gray-400 text-sm">단일 서버의 한계를 넘어 무중단 서비스를 실현하기 위한 4가지 핵심 인프라 지표입니다.</p>
                 </div>
                 
-                <!-- 2x2 방사형 그리드 레이아웃 -->
-                <div class="relative w-full max-w-4xl mx-auto">
-                    
-                    <!-- ⭐️ 뚫고 나오는 입체 코어 (Zero Downtime) -->
-                    <div class="hidden md:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none flex-col items-center justify-center">
+                <div class="relative w-full max-w-5xl mx-auto">
+                    <!-- 완전히 새로운 형태의 코어 (하이테크 직사각형 데이터 허브 패널) -->
+                    <div class="hidden md:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none items-center justify-center">
                         
-                        <!-- 코어 연결선 효과 (가로세로 십자가 빛) -->
-                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150vw] max-w-[1000px] h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent z-0"></div>
-                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[150vh] max-h-[800px] w-[1px] bg-gradient-to-b from-transparent via-blue-500/30 to-transparent z-0"></div>
+                        <!-- 레이저 십자선 교차점 -->
+                        <div class="absolute w-[200vw] max-w-[1200px] h-[1px] bg-gradient-to-r from-transparent via-blue-500/40 to-transparent z-0"></div>
+                        <div class="absolute h-[200vh] max-h-[800px] w-[1px] bg-gradient-to-b from-transparent via-blue-500/40 to-transparent z-0"></div>
                         
-                        <!-- 입체 텍스트 & 백그라운드 링 컨테이너 -->
-                        <div class="relative flex flex-col items-center justify-center">
-                            
-                            <!-- 1. 뒤에 깔리는 원 (글자보다 작게 설정하여 텍스트가 튀어나오게 연출) -->
-                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-28 h-28 bg-gray-900/90 border-2 border-blue-500/50 rounded-full shadow-[0_0_40px_rgba(59,130,246,0.5)] backdrop-blur-md -z-10"></div>
-                            
-                            <!-- 2. 위로 돌출된 뱃지 -->
-                            <span class="text-blue-300 font-mono text-[10px] tracking-widest bg-gray-950 px-3 py-0.5 rounded-full border border-blue-500/40 mb-2 shadow-lg relative z-10 transform -translate-y-1">CORE GOAL</span>
-                            
-                            <!-- 3. 원을 부수고 나오는 거대한 텍스트 (그림자 효과로 공중에 띄움) -->
-                            <strong class="font-black text-4xl md:text-5xl text-center leading-[0.85] tracking-tighter relative z-10 whitespace-nowrap drop-shadow-[0_15px_15px_rgba(0,0,0,0.8)]">
-                                <span class="text-white drop-shadow-md">Zero</span><br>
-                                <span class="text-blue-500 drop-shadow-[0_0_20px_rgba(59,130,246,0.6)]">Downtime</span>
-                            </strong>
+                        <!-- 중앙 허브 패널 (원형 탈피) -->
+                        <div class="relative z-10 bg-gray-950/90 backdrop-blur-xl border border-blue-500/50 rounded-xl px-7 py-4 flex items-center justify-center shadow-[0_0_40px_rgba(59,130,246,0.35)]">
+                            <i class="fas fa-bolt text-blue-400 animate-pulse text-3xl mr-4 drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]"></i>
+                            <div class="flex flex-col items-start">
+                                <span class="text-blue-400 font-mono text-[10px] tracking-[0.25em] leading-none mb-1.5">MISSION CRITICAL</span>
+                                <strong class="text-white font-black text-2xl tracking-tight leading-none uppercase drop-shadow-md">Zero Downtime</strong>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- 4개 카드 그리드 컨테이너 -->
-                    <div id="arch-quadrant-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-x-16 md:gap-y-12 relative z-10">
-                        <!-- JS로 4개의 카드가 주입됩니다 -->
+                    <!-- 간격을 줄이고 크기를 키운 그리드 -->
+                    <div id="arch-quadrant-container" class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 relative z-10">
+                        <!-- JS로 4개의 큼직한 카드가 주입됩니다 -->
                     </div>
                 </div>
             </div>
