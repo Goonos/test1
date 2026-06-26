@@ -284,54 +284,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 2. 아키텍처 섹션 (버전 2: 가로축 스크롤 타임라인 + 마우스 휠 연동)
+    // 2. 아키텍처 섹션 (2x2 Quadrant 방사형 레이아웃)
     // ==========================================
     try {
-        const tlContainer = document.getElementById("arch-timeline-container");
-        if (tlContainer && DATA.architecture) {
-            let tlHtml = "";
+        const quadContainer = document.getElementById("arch-quadrant-container");
+        if (quadContainer && DATA.architecture) {
+            let quadHtml = "";
             DATA.architecture.forEach((item, index) => {
-                // 공간 절약을 위해 태그는 3개까지만 노출
-                const tags = item.tags.slice(0, 3).map(t => `<span class="text-[10px] text-gray-400 bg-gray-800/80 px-2 py-0.5 rounded">#${t}</span>`).join("");
+                const tags = item.tags.map(t => `<span class="text-[10px] text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20 font-mono">#${t}</span>`).join("");
                 
-                tlHtml += `
-                    <div onclick="window.openSplitPanel('${item.id}')" class="shrink-0 w-[280px] md:w-[320px] snap-start cursor-pointer group pb-4">
-                        
-                        <div class="flex flex-col items-center mb-4 relative">
-                            <div class="w-12 h-12 rounded-full bg-gray-900 border-4 border-gray-800 flex items-center justify-center group-hover:border-blue-500 group-hover:bg-blue-500/10 transition z-10 shadow-lg">
-                                <span class="text-xs font-bold text-gray-500 group-hover:text-blue-400 transition">${index + 1}</span>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-gray-900 border border-gray-800 rounded-xl p-5 group-hover:border-blue-500/50 group-hover:bg-gray-800/50 transition relative mt-2 shadow-sm group-hover:shadow-md group-hover:-translate-y-1 transform duration-300">
-                            <div class="absolute -top-[9px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-b-[8px] border-l-transparent border-r-transparent border-b-gray-800 group-hover:border-b-blue-500/50 transition"></div>
+                // 중앙의 'Zero Downtime' 코어를 시각적으로 피하기 위한 방향별 패딩
+                let extraClass = "";
+                if (index === 0) extraClass = "md:pr-6 md:pb-6"; // 좌상단 (1사분면)
+                else if (index === 1) extraClass = "md:pl-6 md:pb-6"; // 우상단 (2사분면)
+                else if (index === 2) extraClass = "md:pr-6 md:pt-6"; // 좌하단 (3사분면)
+                else if (index === 3) extraClass = "md:pl-6 md:pt-6"; // 우하단 (4사분면)
+
+                quadHtml += `
+                    <div class="${extraClass} flex">
+                        <div onclick="window.openSplitPanel('${item.id}')" class="w-full bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 hover:border-blue-500/50 hover:bg-gray-800 transition duration-300 cursor-pointer group shadow-lg hover:shadow-[0_0_25px_rgba(59,130,246,0.15)] relative overflow-hidden flex flex-col justify-between h-full min-h-[220px]">
                             
-                            <h3 class="text-sm md:text-base font-bold text-white mb-2 line-clamp-2 group-hover:text-blue-400 transition">${item.title}</h3>
-                            <div class="flex gap-1 mb-3 flex-wrap">${tags}</div>
-                            <p class="text-gray-400 text-xs leading-relaxed line-clamp-3">${item.summary}</p>
+                            <div class="absolute -inset-full bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl"></div>
+                            
+                            <div class="relative z-10">
+                                <h3 class="text-lg font-bold text-white mb-3 group-hover:text-blue-400 transition">${item.title}</h3>
+                                <div class="flex gap-1.5 mb-4 flex-wrap">${tags}</div>
+                                <p class="text-gray-400 text-sm leading-relaxed">${item.summary}</p>
+                            </div>
+                            
+                            <div class="mt-6 flex items-center justify-end relative z-10 border-t border-gray-800/60 pt-4">
+                                <span class="text-xs text-gray-500 group-hover:text-blue-400 transition flex items-center gap-1 font-medium">
+                                    View Blueprint <i class="fas fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition"></i>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 `;
             });
-            tlContainer.innerHTML = tlHtml;
-
-            // ⭐️ 마우스 휠 스크롤을 가로로 변환해주는 핵심 로직 ⭐️
-            tlContainer.addEventListener("wheel", (e) => {
-                // 마우스 세로 휠(deltaY) 움직임이 감지되었을 때
-                if (e.deltaY !== 0) {
-                    // 1. 기본 브라우저 스크롤(위아래로 화면 이동)을 차단
-                    e.preventDefault(); 
-                    
-                    // 2. 그 수치만큼 컨테이너를 왼쪽/오른쪽으로 스크롤
-                    tlContainer.scrollBy({
-                        left: e.deltaY < 0 ? -150 : 150, // 한 번 휠을 굴릴 때마다 부드럽게 이동할 픽셀량
-                        behavior: 'smooth' // 부드러운 스크롤 애니메이션 적용
-                    });
-                }
-            }, { passive: false }); // preventDefault()를 사용하기 위한 필수 설정
+            quadContainer.innerHTML = quadHtml;
         }
     } catch (e) {
-        console.error("Architecture Timeline Error:", e);
+        console.error("Architecture Quadrant Error:", e);
     }
 
     // ==========================================
