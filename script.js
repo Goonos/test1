@@ -284,7 +284,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 2. 아키텍처 섹션 (2x2 Quadrant 방사형 레이아웃 - 비율 최적화)
+    // 2. 아키텍처 섹션 (2x2 그리드 -> 스플릿 시 1x4 압축 반응형 구조)
     // ==========================================
     try {
         const quadContainer = document.getElementById("arch-quadrant-container");
@@ -293,16 +293,15 @@ document.addEventListener("DOMContentLoaded", () => {
             DATA.architecture.forEach((item, index) => {
                 const tags = item.tags.map(t => `<span class="text-[10px] text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20 font-mono">#${t}</span>`).join("");
                 
-                // 카드 크기(min-h-[220px])와 패딩(p-6)을 줄여 텍스트와의 비율을 밀도 있게 조정
                 quadHtml += `
-                    <div onclick="window.openSplitPanel('${item.id}')" class="w-full bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 hover:border-blue-500/40 hover:bg-gray-800 transition duration-300 cursor-pointer group shadow-lg hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] relative overflow-hidden flex flex-col justify-between h-full min-h-[200px] md:min-h-[220px]">
+                    <div onclick="window.openSplitPanel('${item.id}')" class="arch-card w-full bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 hover:border-blue-500/40 hover:bg-gray-800 transition-all duration-300 cursor-pointer group shadow-lg hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] relative overflow-hidden flex flex-col justify-between h-full min-h-[200px] md:min-h-[220px]">
                         
                         <div class="absolute -inset-full bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl z-0"></div>
                         
                         <i class="${item.icon} absolute -bottom-4 -right-4 text-7xl md:text-[7rem] text-gray-800/20 group-hover:text-blue-500/5 transition duration-500 transform group-hover:scale-110 z-0"></i>
 
                         <div class="relative z-10">
-                            <div class="flex items-center gap-3 md:gap-4 mb-4 pb-4 border-b border-gray-800/80">
+                            <div class="arch-header flex items-center gap-3 md:gap-4 mb-4 pb-4 border-b border-gray-800/80 transition-all duration-300">
                                 <div class="w-11 h-11 rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center justify-center shrink-0 group-hover:bg-blue-500/20 transition shadow-inner">
                                     <i class="${item.icon} text-lg text-blue-400"></i>
                                 </div>
@@ -311,8 +310,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                 </div>
                             </div>
                             
-                            <h3 class="text-sm md:text-base font-bold text-gray-200 mb-2">${item.title}</h3>
-                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed mb-5">${item.summary}</p>
+                            <h3 class="arch-title text-sm md:text-base font-bold text-gray-200 mb-2 transition-all duration-300">${item.title}</h3>
+                            <p class="arch-summary text-gray-400 text-xs md:text-sm leading-relaxed mb-5 transition-all duration-300">${item.summary}</p>
                             <div class="flex gap-1.5 flex-wrap">${tags}</div>
                         </div>
                     </div>
