@@ -186,13 +186,17 @@
             </div>
         </section>
 
-      <section id="architecture" class="py-16 md:py-20 bg-gray-950 border-b border-gray-800">
+      <section id="architecture" class="py-16 md:py-20 bg-gray-950 border-b border-gray-800 overflow-hidden">
             <div class="max-w-5xl mx-auto px-5 md:px-6">
-                <h2 class="text-xl md:text-2xl font-bold mb-2 text-white text-center md:text-left"><i class="fas fa-archive text-blue-500 mr-2"></i> Architecture Whitepapers</h2>
-                <p class="text-gray-400 text-xs md:text-sm mb-6 text-center md:text-left">오라클 인프라 환경 구축 및 성능 최적화에 대한 상세 검증 백서 아카이브입니다. 항목을 클릭하면 우측에 전문이 열립니다.</p>
+                <h2 class="text-xl md:text-2xl font-bold mb-2 text-white text-center md:text-left"><i class="fas fa-route text-blue-500 mr-2"></i> Architecture Roadmap</h2>
+                <p class="text-gray-400 text-xs md:text-sm mb-2 text-center md:text-left">오라클 인프라 구축 및 검증 과정을 기록한 백서 로드맵입니다. 카드를 클릭하면 상세 내용이 열립니다.</p>
                 
-                <div id="arch-list-container" class="w-full flex flex-col gap-3 md:gap-4 mt-6">
-                    </div>
+                <div class="relative mt-8 w-full">
+                    <div class="absolute top-[23px] left-0 w-full h-[2px] bg-gray-800 z-0"></div>
+                    
+                    <div id="arch-timeline-container" class="flex gap-6 overflow-x-auto pb-6 pt-1 relative z-10 snap-x [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-gray-900 [&::-webkit-scrollbar-thumb]:bg-gray-700 hover:[&::-webkit-scrollbar-thumb]:bg-gray-500 [&::-webkit-scrollbar-thumb]:rounded-full">
+                        </div>
+                </div>
             </div>
         </section>
 
