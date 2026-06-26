@@ -1,4 +1,61 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // ==========================================
+    // 💡 스플릿 스크린 (백서 패널) 글로벌 제어 함수
+    // ==========================================
+    const mainWrapper = document.getElementById("main-wrapper");
+    const mainNav = document.getElementById("main-nav");
+    const splitPanel = document.getElementById("split-panel");
+    const splitCloseBtn = document.getElementById("split-panel-close");
+    const splitTitle = document.getElementById("split-panel-title");
+    const splitBody = document.getElementById("split-panel-body");
+    const splitIcon = document.getElementById("split-panel-icon"); // ⭐️ 아이콘 요소 추가
+
+    // 트러블슈팅 카드의 인라인 버튼에서도 호출할 수 있도록 window 객체에 할당
+    window.openSplitPanel = function(archId) {
+        if (!DATA.architecture) return;
+        const arch = DATA.architecture.find(a => a.id === archId);
+        if (!arch) return;
+
+        // 1. 백서 데이터 주입 (타이틀, 본문, 그리고 아이콘)
+        if (splitTitle) splitTitle.innerText = arch.title;
+        if (splitBody) splitBody.innerHTML = arch.content;
+        if (splitIcon && arch.icon) {
+            // ⭐️ 해당 카드의 고유 아이콘으로 클래스 변경
+            splitIcon.className = arch.icon + " text-blue-400 text-lg md:text-xl shrink-0";
+        }
+
+        // 2. 스플릿 애니메이션 클래스 부착 (화면 분할)
+        if (mainWrapper) mainWrapper.classList.add("split-active-main");
+        if (mainNav) mainNav.classList.add("split-active-nav");
+        if (splitPanel) splitPanel.classList.add("split-active-panel");
+
+        // 3. 아키텍처 섹션으로 부드럽게 화면 스크롤 이동
+        document.getElementById("architecture").scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // 4. 백서 내부에 코드가 있다면 구문 강조 다시 적용
+        setTimeout(() => {
+            if (typeof hljs !== 'undefined') {
+                document.querySelectorAll('#split-panel-body pre code').forEach((block) => {
+                    hljs.highlightElement(block);
+                });
+            }
+        }, 100);
+    };
+
+    window.closeSplitPanel = function() {
+        if (mainWrapper) mainWrapper.classList.remove("split-active-main");
+        if (mainNav) mainNav.classList.remove("split-active-nav");
+        if (splitPanel) splitPanel.classList.remove("split-active-panel");
+        
+        // 닫을 때 내부 내용 비우기 (잔상 방지)
+        setTimeout(() => {
+            if (splitBody) splitBody.innerHTML = "";
+        }, 500);
+    };
+
+    if (splitCloseBtn) {
+        splitCloseBtn.addEventListener("click", window.closeSplitPanel);
+    }
     
     // ==========================================
     // 1. 트러블슈팅 섹션 (데이터 누락 없는 정상 복구 버전)
