@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>권오승 Portfolio | 전문성을 바탕으로 유연하게 소통하는 파트너</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans antialiased selection:bg-blue-500 selection:text-white">
+
+    <nav class="fixed top-0 left-0 w-full bg-gray-900/90 backdrop-blur-md border-b border-gray-800 z-50 px-5 md:px-6 py-3 md:py-4">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0">
+            <a href="#" class="text-lg md:text-xl font-mono font-bold text-blue-400">HOME</a>
+            <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 md:space-x-6 text-xs md:text-sm font-medium text-gray-400">
+                <a href="#about" class="hover:text-blue-400 transition">About</a>
+                <a href="#troubleshooting" class="hover:text-blue-400 transition">Troubleshooting</a>
+                <a href="#architecture" class="hover:text-blue-400 transition">Architecture</a>
+                <a href="#blog" class="hover:text-blue-400 transition">Daily Log</a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="about" class="pt-28 md:pt-32 pb-16 md:pb-20 px-5 md:px-6 max-w-5xl mx-auto border-b border-gray-800">
+        <div class="grid md:grid-cols-3 gap-8 md:gap-12 items-start w-full">
+            
+            <!-- 왼쪽: 프로필 사진 및 기본 정보-->
+<div class="md:col-span-1 flex flex-col items-center text-center space-y-5 w-full">
+    <!-- 프로필 이미지 -->
+    <div class="w-36 h-36 md:w-48 md:h-48 shrink-0 bg-gray-800 border border-gray-700 rounded-2xl flex flex-col items-center justify-center text-gray-500 relative overflow-hidden group hover:border-blue-500 transition">
+        <img src="image/0.jpg" alt="권오승 프로필" class="w-full h-full object-cover">
+    </div>
+    
+    <!-- 인적 사항 (md: 제거하여 PC에서도 상시 중앙 정렬) -->
+    <div class="space-y-2.5 font-mono text-sm w-full flex flex-col items-center text-center">
+        <h2 class="text-xl md:text-2xl font-extrabold text-white tracking-wide">권오승</h2>
+        <p class="text-blue-400 font-medium text-xs md:text-sm">[ 1998.03.31 ]</p>
+        <p class="text-gray-400 hover:text-blue-300 transition text-xs md:text-sm break-all">
+            <i class="fas fa-phone-alt mr-1.5"></i>010-4951-0331
+        </p>
+        <p class="text-gray-400 hover:text-blue-300 transition text-xs md:text-sm break-all">
+            <i class="fas fa-envelope mr-1.5"></i>ohseung31@naver.com
+        </p>
+                    
+                    
+                    <div class="pt-4 w-full">
+                        <p class="text-gray-500 text-[11px] mb-2 text-left font-sans uppercase tracking-wider"><i class="fas fa-images mr-1"></i> Gallery</p>
+                        <div id="album-grid" class="grid grid-cols-3 gap-1.5 w-full aspect-square bg-gray-800/50 p-1.5 rounded-xl border border-gray-800">
+                            </div>
+                    </div>
+
+                    <div class="pt-3 flex justify-center md:justify-start">
+                        <a href="https://github.com/Determination-github" target="_blank" class="bg-gray-800 hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg text-xs font-medium inline-flex items-center gap-2 border border-gray-700 transition">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 space-y-8 w-full">
+                <div class="text-center md:text-left">
+                    <span class="text-blue-400 font-mono text-xs block mb-1.5 md:mb-1">[전문성을 바탕으로 유연하게 소통하는 파트너]</span>
+                    <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-4 leading-snug">
+                        실무 아키텍처 이해도를 갖춘 <br><span class="text-blue-500">ORACLE DBA</span>
+                    </h1>
+                    <p class="text-gray-400 text-xs md:text-sm leading-relaxed word-break-keep-all">
+                        산업 실무 현장에서의 탄탄한 협업 및 하드웨어/통신 시스템 경험을 바탕으로, 현재는 데이터베이스 내부 동작 원리와 쿼리 성능 최적화에 몰두하고 있습니다. 인프라 전체를 거시적으로 바라보며 안정적인 가용성을 확보하는 엔지니어가 되겠습니다.
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-8 md:gap-8 border-t border-gray-800/80 pt-6 w-full text-left">
+    <!-- 1. 학력 및 경력 (왼쪽 단) -->
+    <div class="space-y-8 md:space-y-6 text-left">
+        <!-- Education -->
+        <div class="text-left">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-400 mb-4 md:mb-3 flex items-center justify-start gap-2">
+                <i class="fas fa-graduation-cap text-blue-500 text-xs"></i> Education
+            </h3>
+            <ul class="space-y-4 border-l border-gray-800 pl-3 ml-1.5 text-left">
+                <li class="relative text-left">
+                    <strong class="text-gray-200 block text-sm font-bold">서울과학기술대학교</strong>
+                    <span class="text-gray-400 block text-xs mt-0.5">정보통신융합공학과 입학</span>
+                    <span class="text-gray-400 block text-xs mt-0.5">헬스피트니스과 복수전공</span>
+                    <span class="text-gray-500 block font-mono text-xs mt-0.5">2024.03 ~ 재학 중</span>
+                </li>
+                <li class="relative text-left">
+                    <strong class="text-gray-200 block text-sm font-bold">재능대학교</strong>
+                    <span class="text-gray-400 block text-xs mt-0.5">전자과 졸업</span>
+                    <span class="text-blue-400 block font-mono text-xs mt-0.5">학점: 3.76 / 4.5 (만점)</span>
+                    <span class="text-gray-500 block font-mono text-xs mt-0.5">2018.02</span>
+                </li>
+                <li class="relative text-left">
+                    <strong class="text-gray-200 block text-sm font-bold">재능고등학교 졸업</strong>
+                    <span class="text-gray-500 block font-mono text-xs mt-0.5">2016.02</span>
+                </li>
+            </ul>
+        </div>
+        <!-- Experience -->
+        <div class="text-left">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-400 mb-4 md:mb-3 flex items-center justify-start gap-2">
+                <i class="fas fa-briefcase text-blue-500 text-xs"></i> Experience
+            </h3>
+            <ul class="space-y-4 md:space-y-3 border-l border-gray-800 pl-3 ml-1.5 text-left">
+                <li class="text-left">
+                    <strong class="text-gray-200 block text-sm font-bold">(주)누비콤</strong>
+                    <span class="text-gray-500 block font-mono text-xs mt-0.5">2022.09 ~ 2026.06</span>
+                </li>
+                <li class="text-left">
+                    <strong class="text-gray-200 block text-sm font-bold">(주)엔티렉스</strong>
+                    <span class="text-gray-500 block font-mono text-xs mt-0.5">2020.11 ~ 2022.08</span>
+                </li>
+                <li class="text-left">
+                    <strong class="text-gray-200 block text-sm font-bold">공군 병장 만기전역</strong>
+                    <span class="text-gray-500 block font-mono text-xs mt-0.5">2019.01 ~ 2022.10</span>
+                </li>
+                <li class="text-left">
+                    <strong class="text-gray-200 block text-sm font-bold">(주)엔티렉스</strong>
+                    <span class="text-gray-500 block font-mono text-xs mt-0.5">2016.01 ~ 2018.04</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 2. 자격증 및 이수 내역 (오른쪽 단) -->
+    <div class="space-y-6 text-left">
+        <!-- Training -->
+        <div class="text-left">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-400 mb-3 flex items-center justify-start gap-2">
+                <i class="fas fa-graduation-cap text-blue-500 text-xs"></i> Training
+            </h3>
+            <ul class="space-y-2 text-left">
+                <li class="bg-gray-800/30 px-3 py-2.5 rounded border border-gray-800/50 flex flex-col gap-0.5 text-left">
+                    <strong class="text-gray-200 block text-sm font-bold">아이티윌 오라클 부트캠프 (96기)</strong>
+                    <span class="text-gray-500 block font-mono text-xs mt-0.5">2026.06 ~ 2026.11</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Certificates -->
+        <div class="text-left">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-400 mb-3 flex items-center justify-start gap-2">
+                <i class="fas fa-certificate text-blue-500 text-xs"></i> Certificates
+            </h3>
+            <ul class="space-y-2 text-left">
+                <li class="bg-gray-800/30 px-3 py-2.5 rounded border border-gray-800/50 flex justify-between items-center text-left">
+                    <strong class="text-gray-200 block text-sm font-bold">SQLD (SQL 개발자)</strong>
+                </li>
+                <li class="bg-gray-800/30 px-3 py-2.5 rounded border border-gray-800/50 flex justify-between items-center text-left">
+                    <strong class="text-gray-200 block text-sm font-bold">정보처리기사 (필기)</strong>
+                </li>
+                <li class="bg-gray-800/30 px-3 py-2.5 rounded border border-gray-800/50 flex justify-between items-center text-left">
+                    <strong class="text-gray-200 block text-sm font-bold">정보기기운용기능사</strong>
+                </li>
+                <li class="bg-gray-800/30 px-3 py-2.5 rounded border border-gray-800/50 flex justify-between items-center text-left">
+                    <strong class="text-gray-200 block text-sm font-bold">정보통신기기기능사</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+        </div>
+    </header>
+
+    <section id="troubleshooting" class="py-16 md:py-20 px-5 md:px-6 max-w-5xl mx-auto border-b border-gray-800">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 md:mb-10">
+            <div class="text-center md:text-left">
+                <h2 class="text-xl md:text-2xl font-bold mb-2 text-white"><i class="fas fa-tools text-blue-500 mr-2"></i> Troubleshooting Experience</h2>
+                <p class="text-gray-400 text-xs md:text-sm">직면했던 성능 병목 현상을 엔지니어링 관점에서 해결한 기록입니다.</p>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-3 shrink-0">
+                <span id="trouble-indicator" class="text-xs font-mono text-gray-500">Page 1 / 1</span>
+                <div class="flex gap-1.5">
+                    <button id="trouble-prev" class="bg-gray-800 hover:bg-gray-700 text-white w-9 h-9 rounded-full flex items-center justify-center border border-gray-700 transition cursor-pointer">
+                        <i class="fas fa-chevron-left text-xs"></i>
+                    </button>
+                    <button id="trouble-next" class="bg-gray-800 hover:bg-gray-700 text-white w-9 h-9 rounded-full flex items-center justify-center border border-gray-700 transition cursor-pointer">
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex md:hidden justify-center items-center gap-4 mb-6">
+            <button id="trouble-prev-mobile" class="bg-gray-800 hover:bg-gray-700 text-white w-10 h-10 rounded-full flex items-center justify-center border border-gray-700 transition">
+                <i class="fas fa-chevron-left text-sm"></i>
+            </button>
+            <span id="trouble-indicator-mobile" class="text-xs font-mono text-gray-400">Page 1 / 1</span>
+            <button id="trouble-next-mobile" class="bg-gray-800 hover:bg-gray-700 text-white w-10 h-10 rounded-full flex items-center justify-center border border-gray-700 transition">
+                <i class="fas fa-chevron-right text-sm"></i>
+            </button>
+        </div>
+
+        <div class="overflow-hidden w-full">
+            <div id="trouble-container" class="flex transition-transform duration-500 ease-in-out">
+            </div>
+        </div>
+    </section>
+
+    <section id="architecture" class="py-16 md:py-20 bg-gray-950 border-b border-gray-800">
+        <div class="max-w-5xl mx-auto px-5 md:px-6">
+            <h2 class="text-xl md:text-2xl font-bold mb-2 text-white text-center md:text-left"><i class="fas fa-network-wired text-blue-500 mr-2"></i> Architecture Blueprint</h2>
+            <p class="text-gray-400 text-xs md:text-sm mb-8 md:mb-10 text-center md:text-left">Replication, Clustering, 백업 및 복구 시나리오 검증 결과 백서입니다.</p>
+            <div id="arch-container" class="grid sm:grid-cols-2 gap-5 md:gap-6">
+            </div>
+        </div>
+    </section>
+
+    <section id="blog" class="py-16 md:py-20 px-5 md:px-6 max-w-5xl mx-auto border-t border-gray-800">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 md:mb-10">
+            <div class="text-center md:text-left">
+                <h2 class="text-xl md:text-2xl font-bold mb-2 text-white"><i class="fas fa-book text-blue-500 mr-2"></i> Daily Study Log</h2>
+                <p class="text-gray-400 text-xs md:text-sm">매일 블로그에 꾸준히 기록하고 학습한 흔적들의 아카이브입니다.</p>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-3 shrink-0">
+                <span id="blog-indicator" class="text-xs font-mono text-gray-500">Page 1 / 1</span>
+                <div class="flex gap-1.5">
+                    <button id="blog-prev" class="bg-gray-800 hover:bg-gray-700 text-white w-9 h-9 rounded-full flex items-center justify-center border border-gray-700 transition cursor-pointer">
+                        <i class="fas fa-chevron-left text-xs"></i>
+                    </button>
+                    <button id="blog-next" class="bg-gray-800 hover:bg-gray-700 text-white w-9 h-9 rounded-full flex items-center justify-center border border-gray-700 transition cursor-pointer">
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex md:hidden justify-center items-center gap-4 mb-6">
+            <button id="blog-prev-mobile" class="bg-gray-800 hover:bg-gray-700 text-white w-10 h-10 rounded-full flex items-center justify-center border border-gray-700 transition">
+                <i class="fas fa-chevron-left text-sm"></i>
+            </button>
+            <span id="blog-indicator-mobile" class="text-xs font-mono text-gray-400">Page 1 / 1</span>
+            <button id="blog-next-mobile" class="bg-gray-800 hover:bg-gray-700 text-white w-10 h-10 rounded-full flex items-center justify-center border border-gray-700 transition">
+                <i class="fas fa-chevron-right text-sm"></i>
+            </button>
+        </div>
+
+        <div class="overflow-hidden w-full">
+            <div id="blog-container" class="flex transition-transform duration-500 ease-in-out">
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 text-center text-[10px] md:text-xs text-gray-600 border-t border-gray-800">
+        <p>© 2026 권오승. Powered by Pure HTML/CSS/JS & GitHub Pages.</p>
+    </footer>
+
+    <div id="gallery-modal" class="fixed inset-0 bg-black/90 z-[100] hidden flex-col items-center justify-center p-4 backdrop-blur-sm select-none">
+        <button id="modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl p-2 cursor-pointer transition z-10">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <button id="modal-prev" class="absolute left-2 md:left-8 text-gray-400 hover:text-white text-3xl md:text-5xl p-4 cursor-pointer transition z-10">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <div class="max-w-2xl w-full flex flex-col items-center gap-4 text-center relative px-4">
+            <img id="modal-img" src="" alt="확대 이미지" class="max-h-[70vh] max-w-full rounded-xl object-contain border border-gray-800 shadow-2xl">
+            <h4 id="modal-title" class="text-lg font-bold text-white mt-2"></h4>
+            <p id="modal-comment" class="text-sm text-gray-400 max-w-md word-break-keep-all leading-relaxed"></p>
+        </div>
+
+        <button id="modal-next" class="absolute right-2 md:right-8 text-gray-400 hover:text-white text-3xl md:text-5xl p-4 cursor-pointer transition z-10">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <script src="queries.js"></script> <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
